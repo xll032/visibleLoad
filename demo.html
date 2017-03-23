@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-COMPATIBLE" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>可视区加载</title>
+    <link rel="stylesheet" href="css/demo.min.css">
+</head>
+<body>
+    <!--<div style="height:1400px"></div>-->
+    <div class="container">
+        <h2>1195章 让我为你战斗到最后一刻（可视区ajax加载测试）</h2>
+        <div class="content">
+            <div class="caption1 info"></div>
+            <div class="caption2 primary"></div>
+            <div class="caption3 danger"></div>
+            <div class="captionAll warning"></div>
+        </div>
+    </div>
+    <pre>
+
+            依赖jQuery
+
+            第一种用法   <span class="warning">特点：只能传一个对象进行操作；可选择直接加载或者进入可视区加载</span>
+                （1） <span class="info">$('.obj').visible(boolean,function(){ ... });</span>
+                        对不同类名的容器是否进入可视区进行操作，回调函数可自行填写
+                        this指向 .obj
+                        第一个参数 boolean 可选。 true：表示进入可视区加载数据；false：表示不管是否可视直接加载
+                （2）<span class="info">$('.obj').visible();</span>
+                        不传参数，返回 是否在可视区的 boolean值
+
+             第二种用法   <span class="warning">特点：可传一个数组的对象进行操作；只能使用进入可视区加载</span>
+                （1） <span class="info">$.visible(['Name1','Name2','Name3',...],function(){ ... });</span>
+                         对不同类名的容器是否进入可视区进行操作，回调函数可自行填写
+                         this指向 当前进入可视区的 className 的对象
+                         第一个参数 Array 必选。 可填写多个。只有一个的时候也要写成 ['Name']，否则无效
+                （2）<span class="info">$.visible(['className1','className2',...]);</span>
+                        不传回调函数，返回 是否在可视区的 boolean值。
+                        按填写顺序返回一个数组，如 [false,true,...]。
+                        若只传了一个['className1']，直接返回 true 或者 false
+
+                <span class="success">* 版本新增 </span><span class="info"> $.visible(['Name',...],<span class="danger">string</span>,function(){ ... });</span>
+                         1、<span class="danger">取消了</span>第二种用法<span class="danger">只能使用 类名 </span>的设定。改为自行填全css选择器内容（增加实用性）
+                         2、<span class="danger">新增了</span>一个<span class="danger">参数</span>，除了进入可视区加载外，到底部也可以加载数据（丰富功能）
+                                新增参数的说明
+                                        top：
+                                            顶部进入可视区触发回调函数（适用于已知固定的多个模块进入可视区内的加载）；
+                                        bottom：
+                                            不可填错，到底部到可视区触发回调函数（适用于单个模块不确定加载数量的到底部加载新数据）
+                                        不传回调函数的时候，也是一样返回 是否满足触发回调函数条件的boolean值
+    </pre>
+    <div class="intro">
+        <button class="one">加载写法1</button>
+        <br>
+        <br>
+        <button class="two">加载写法2</button>
+        <br>
+        <br>
+        <button class="three">加载写法3</button>
+        <br>
+        <br>
+        <button class="clear">清空内容</button>
+        <br>
+        <br>
+        <button class="use">用法说明</button>
+    </div>
+    <div id="test"></div>
+    <script src="js/jquery-1.11.2.min.js"></script>
+    <script src="js/visible_load.js"></script>
+    <script src="js/demo.js"></script>
+
+</body>
+</html>

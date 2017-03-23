@@ -1,0 +1,59 @@
+
+	插件依赖jQuery使用  
+
+            第一种用法   特点：只能传一个对象进行操作；可选择直接加载或者 obj 进入可视区加载
+                （1） $('.obj').visible(boolean,function(){ ... });
+
+                        对不同类名的容器是否进入可视区进行操作，回调函数可自行填写
+                        this指向 .obj
+
+                        第一个参数 boolean 可选。 true：表示进入可视区加载数据；false：表示不管是否可视直接加载
+
+                （2）$('.obj').visible();
+
+                        不传参数，返回 是否在可视区的 boolean值
+
+
+             第二种用法   特点：可传一个数组的对象进行操作；只能使用 obj 进入可视区加载
+                （1） $.visible(['#id','.class','name3',...],function(){ ... });
+
+                         对不同类名的容器是否进入可视区进行操作，回调函数可自行填写
+                         this指向 当前进入可视区的 name 的对象
+
+                         第一个参数 Array 必选。 可填写多个。只有一个的时候也要写成 ['name']，否则无效
+
+                （2）$.visible(['Name1','className2',...]);
+
+                        不传回调函数，返回 是否在可视区的 boolean值。
+                        按填写顺序返回一个数组，如 [false,true,...]。
+                        若只传了一个['className1']，直接返回 true 或者 false
+
+			//*****  新增到底部加载    $.visible(['.name1'],'bottom',function(){ ... });  			*****//
+			//*****  到底部会自动加载， bottom不能写错。填top或不填或乱填都默认是（2）中的用法		*****//
+
+			//*****	新版 将原来填入类名的设定取消，自行填全 css选择器					*****//
+
+示例一：
+$('.caption1').visible(false,function () {
+                var _self = $(this);
+                $.ajax( ... );
+            });
+
+示例二： 
+$.visible(['.caption1','.caption2','.caption3'], function () {   //这里是类名
+                var _self = $(this);//这里的this指向的是当前进入可视区的元素
+                var _index = _self.index();
+                var _url = '';
+
+                switch (_index){
+                    case 0:
+                        _url = 'data/data1.json';
+                        break;
+                    case 1:
+                        _url = 'data/data2.json';
+                        break;
+                    case 2:
+                        _url = 'data/data3.json';
+                }
+                $.ajax( ... );
+            });
